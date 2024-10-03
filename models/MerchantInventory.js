@@ -10,13 +10,12 @@ const MerchantInventory = sequelize.define('MerchantInventory', {
   level_required: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  }
+  },
 }, {
   tableName: 'merchant_inventory',
-  timestamps: false
+  timestamps: false,
 });
 
-// Relations
-MerchantInventory.belongsTo(Item, { foreignKey: 'itemId', onDelete: 'CASCADE' });
+MerchantInventory.belongsTo(Item, { foreignKey: 'itemId' });
 
 module.exports = MerchantInventory;

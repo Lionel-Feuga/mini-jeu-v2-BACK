@@ -14,6 +14,28 @@ module.exports = function (app) {
     res.json(inventory);
   });
 
+  const { Inventory, Item } = require('../models');
+
+ 
+    app.get('/api/inventories/player/:playerId', async (req, res) => {
+      const playerId = req.params.playerId;
+      try {
+        const inventory = await Inventory.findAll({
+          where: { playerId },
+          include: {
+            model: Item, 
+          },
+        });
+        if (!inventory.length) {
+          return res.status(404).send('Aucun inventaire trouvé pour ce joueur.');
+        }
+        res.json(inventory);
+      } catch (error) {
+        console.error('Erreur lors de la récupération de l\'inventaire :', error);
+        res.status(500).send('Erreur lors de la récupération de l\'inventaire.');
+      }
+    });
+
   app.post('/api/inventories', async (req, res) => {
     const inventory = await Inventory.create(req.body);
     res.status(201).json(inventory);
