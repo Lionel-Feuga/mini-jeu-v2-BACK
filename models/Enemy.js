@@ -21,10 +21,18 @@ const Enemy = sequelize.define('Enemy', {
   damage: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  }
+  },
+  order: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 }, {
   tableName: 'enemies',
-  timestamps: false
+  timestamps: false,
 });
 
 module.exports = Enemy;

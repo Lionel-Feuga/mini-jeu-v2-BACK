@@ -8,7 +8,7 @@ const Item = sequelize.define('Item', {
   },
   type: {
     type: DataTypes.STRING,
-    allowNull: false,
+    allowNull: false,  
   },
   value: {
     type: DataTypes.INTEGER,
@@ -25,10 +25,18 @@ const Item = sequelize.define('Item', {
   price_sell: {
     type: DataTypes.INTEGER,
     allowNull: false,
-  }
+  },
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 }, {
   tableName: 'items',
-  timestamps: false
+  timestamps: false,
 });
 
 module.exports = Item;

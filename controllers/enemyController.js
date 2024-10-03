@@ -2,7 +2,9 @@ const { Enemy } = require('../models');
 
 module.exports = function (app) {
   app.get('/api/enemies', async (req, res) => {
-    const enemies = await Enemy.findAll();
+    const enemies = await Enemy.findAll({
+      order: [['order', 'ASC']], 
+    });
     res.json(enemies);
   });
 
@@ -15,7 +17,7 @@ module.exports = function (app) {
   });
 
   app.post('/api/enemies', async (req, res) => {
-    const enemy = await Enemy.create(req.body); 
+    const enemy = await Enemy.create(req.body);
     res.status(201).json(enemy);
   });
 
@@ -24,7 +26,7 @@ module.exports = function (app) {
     if (!enemy) {
       return res.status(404).send('Ennemi non trouvé.');
     }
-    const updatedEnemy = await enemy.update(req.body); 
+    const updatedEnemy = await enemy.update(req.body);
     res.json(updatedEnemy);
   });
 

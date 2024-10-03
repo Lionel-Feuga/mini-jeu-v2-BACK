@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Skills = sequelize.define('Skills', {
+const Skill = sequelize.define('Skill', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -12,15 +12,19 @@ const Skills = sequelize.define('Skills', {
   },
   damage: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
   },
   level_required: {
     type: DataTypes.INTEGER,
     allowNull: false,
+  },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
   }
 }, {
   tableName: 'skills',
-  timestamps: false
+  timestamps: false,
 });
 
-module.exports = Skills;
+module.exports = Skill;

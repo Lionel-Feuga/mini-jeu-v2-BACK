@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
-const Player = require('./Player');
 const Item = require('./Item');
 
 const Inventory = sequelize.define('Inventory', {
@@ -10,15 +9,14 @@ const Inventory = sequelize.define('Inventory', {
   },
   is_equipped: {
     type: DataTypes.BOOLEAN,
-    allowNull: false,
-  }
+    defaultValue: false,
+  },
 }, {
   tableName: 'inventories',
-  timestamps: false
+  timestamps: false,
 });
 
-// Relations
-Inventory.belongsTo(Player, { foreignKey: 'playerId', onDelete: 'CASCADE' });
-Inventory.belongsTo(Item, { foreignKey: 'itemId', onDelete: 'CASCADE' });
+Inventory.belongsTo(Item, { foreignKey: 'itemId' });
+Item.hasMany(Inventory, { foreignKey: 'itemId' });
 
 module.exports = Inventory;
